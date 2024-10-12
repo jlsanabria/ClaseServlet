@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/libreriadb</property>
+        <property name="connection.username">libreria</property>
+        <property name="connection.password">123456</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <!-- Config thread session -->
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.connection.pool_size">5</property>
+
+        <!-- DB schema will be updated if needed -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Mapping Classes -->
+        <mapping class="tech.icei.model.Autor" />
+        <mapping class="tech.icei.model.Editorial" />
+        <mapping class="tech.icei.model.Libro" />
+        <mapping class="tech.icei.model.Usuario" />
+        <mapping class="tech.icei.model.Factura" />
+    </session-factory>
+</hibernate-configuration>
