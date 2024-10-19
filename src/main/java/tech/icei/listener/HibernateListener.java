@@ -2,7 +2,6 @@ package tech.icei.listener;
 
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
-import org.hibernate.service.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.icei.util.HibernateUtil;

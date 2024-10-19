@@ -14,4 +14,8 @@ public interface LibroService {
     List<Autor> obtenerAutores();
 
     List<Editorial> obtenerEditoriales();
+
+    Autor obtenerAutorPorCodigo(String codAutor);
+
+    Editorial obtenerEditorialPorId(Integer id);
 }

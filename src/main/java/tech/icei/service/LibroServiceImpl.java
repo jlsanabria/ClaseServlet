@@ -15,8 +15,8 @@ public class LibroServiceImpl implements LibroService {
 
     public LibroServiceImpl() {
         libroDAO = new LibroDAOImpl();
-        //autorDAO = new AutorDAOImpl(factory);
-        //editorialDAO = new EditorialDAOImpl(factory);
+        autorDAO = new AutorDAOImpl();
+        editorialDAO = new EditorialDAOImpl();
     }
 
     /**
@@ -47,5 +47,15 @@ public class LibroServiceImpl implements LibroService {
     @Override
     public List<Editorial> obtenerEditoriales() {
         return editorialDAO.obtenerEditoriales();
+    }
+
+    @Override
+    public Autor obtenerAutorPorCodigo(String codAutor) {
+        return autorDAO.getAutor(codAutor);
+    }
+
+    @Override
+    public Editorial obtenerEditorialPorId(Integer id) {
+        return editorialDAO.getEditorial(id);
     }
 }

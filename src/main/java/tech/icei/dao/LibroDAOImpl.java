@@ -35,11 +35,18 @@ public class LibroDAOImpl implements LibroDAO {
      */
     @Override
     public Libro create(Libro libro) {
-        session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.persist(libro);
-        session.getTransaction().commit();
-        session.close();
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        if(!session.getTransaction().isActive()) {
+            session.beginTransaction();
+        }
+        try {
+            session.persist(libro);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            return null;
+        }
+        //session.close();
         return libro;
     }
 

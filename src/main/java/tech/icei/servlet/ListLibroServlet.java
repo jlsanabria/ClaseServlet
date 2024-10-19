@@ -20,6 +20,11 @@ public class ListLibroServlet extends HttpServlet {
 //        this.libroService = libroService;
 //    }
 
+    /**
+     * GET --> Devolver resultados
+     * @param request
+     * @param response
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html");
         try {

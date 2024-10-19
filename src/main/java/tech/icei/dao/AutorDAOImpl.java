@@ -4,30 +4,31 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import tech.icei.model.Autor;
+import tech.icei.util.HibernateUtil;
 
 import java.util.List;
+import java.util.Objects;
 
 public class AutorDAOImpl implements AutorDAO {
-    private final SessionFactory factory;
     private Session session;
 
-    public AutorDAOImpl(SessionFactory factory) {
-        this.factory = factory;
+    public AutorDAOImpl() {
     }
 
     @Override
     public Autor getAutor(String codigo) {
-        session = factory.openSession();
-        session.beginTransaction();
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        //session.beginTransaction();
         Query<Autor> query = session
-                .createQuery("from Autor a where a.codAutor = :codigoA", Autor.class)
-                .setParameter("codigoA", codigo);
-        return query.getSingleResult();
+                .createQuery("from Autor a where a.codAutor = :codigo", Autor.class)
+                .setParameter("codigo", codigo);
+        //return Objects.nonNull(query.list()) ? query.getSingleResult() : null;
+        return query.list() != null && !query.list().isEmpty() ? query.getSingleResult() : null;
     }
 
     @Override
     public Autor guardarAutor(Autor autor) {
-        session = factory.openSession();
+        session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.persist(autor);
         session.getTransaction().commit();
@@ -37,7 +38,7 @@ public class AutorDAOImpl implements AutorDAO {
 
     @Override
     public List<Autor> obtenerAutores() {
-        session = factory.openSession();
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         Query<Autor> query = session
                 .createQuery("from Autor", Autor.class);
